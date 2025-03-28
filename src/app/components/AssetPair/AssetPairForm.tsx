@@ -53,7 +53,7 @@ const AssetPairForm = ({ className }: {className?: string}) => {
     const isSymbolAvailable = hasSymbol(symbol, marketData.symbols);
 
     if (!isSymbolAvailable) {
-      setFormError(`Given "${symbol}" is not available.`)
+      setFormError(`Given "${symbol}" is not available. Try ETHBTC.`)
       return;
     }
     
@@ -103,7 +103,7 @@ const AssetPairForm = ({ className }: {className?: string}) => {
               <section className="flex justify-between items-center pt-4">
                 {
                   formError ?
-                  <Text size="sm" className="text-red-500">{formError}</Text>
+                  <Text size="sm" className="text-red-500 max-w-64">{formError}</Text>
                   :
                   <Ticker />
                 }
