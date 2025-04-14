@@ -22,6 +22,7 @@ const RecentTrades = () => {
   const [records, setRecords] = useState(sortBy(tradeData, 'id').slice(0, PAGE_SIZE));
 
   useEffect(() => {
+    // useMemo could be used but as of now, but it's not a heavy computation (tradeData is not like 5k items)
     const { from, to, record } = sortTable(tradeData, sortStatus, PAGE_SIZE);
     setRecords(record.slice(from, to));
   }, [sortStatus, tradeData]);
@@ -38,6 +39,7 @@ const RecentTrades = () => {
     }
   }, [tradeData]);
 
+  // No need useCallback as of now since sortTable() is not passed to any child component as a prop
   const sortTable = (_tradeData: typeof tradeData, _sortStatus: typeof sortStatus, pageSize: number) => {
     const data = sortBy(tradeData, sortStatus.columnAccessor);
     const { from, to } = cutByPage(1, pageSize);
